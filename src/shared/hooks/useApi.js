@@ -57,10 +57,8 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('token');
     if (token) {
-      // Verify token is still valid
       const userData = localStorage.getItem('user');
       setUser(userData ? JSON.parse(userData) : null);
     }
@@ -70,22 +68,17 @@ export const useAuth = () => {
   const login = async (username, password) => {
     try {
       const response = await api.post('/auth/login/', { username, password });
-      if (response.data.success) {
-        localStorage.setItem('access_token', response.data.data.access);
-        localStorage.setItem('refresh_token', response.data.data.refresh);
-        localStorage.setItem('user', JSON.stringify(response.data.data.user));
-        setUser(response.data.data.user);
-        return { success: true };
-      }
-      return { success: false, message: response.data.message };
+      localStorage.setItem('token', response.data.access);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      setUser(response.data.user);
+      return { success: true };
     } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Login failed' };
+      return { success: false, message: error.response?.data?.detail || 'Login failed' };
     }
   };
 
   const logout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
   };

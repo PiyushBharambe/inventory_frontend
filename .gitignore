@@ -3,23 +3,67 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Production build
 build/
 dist/
+*.tgz
+out/
 
 # Environment variables
 .env
 .env.local
-.env.production
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python virtual environment (if any)
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
 
 # Cache
 .npm
+.yarn/cache
 .eslintcache
+*.log
+.next/
+.nuxt/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*.sublime-*
 
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output
+.jest/
+
+# Runtime
+.serverless/
+.firebase/
+
+# Misc
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
